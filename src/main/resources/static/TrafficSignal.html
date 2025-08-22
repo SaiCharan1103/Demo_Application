@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Traffic Signal Simulation</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin-top: 40px;
+        }
+        .signal-container {
+            background: #222;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+        }
+        .light {
+            width: 60px;
+            height: 60px;
+            margin: 15px 0;
+            border-radius: 50%;
+            background: #444;
+            box-shadow: 0 0 8px #000 inset;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .light.red.active {
+            background: #ff2d2d;
+            box-shadow: 0 0 20px 6px #ff2d2d;
+        }
+        .light.yellow.active {
+            background: #ffe347;
+            box-shadow: 0 0 20px 6px #ffe347;
+        }
+        .light.green.active {
+            background: #3cff3c;
+            box-shadow: 0 0 20px 6px #3cff3c;
+        }
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            background: #333;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #555;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            min-height: 1.2em;
+        }
+    </style>
+</head>
+<body>
+<h2>Traffic Signal Simulation</h2>
+<div class="signal-container">
+    <div class="light red" id="red"></div>
+    <div class="light yellow" id="yellow"></div>
+    <div class="light green" id="green"></div>
+</div>
+<div class="controls">
+    <button onclick="setSignal('RED')">Red</button>
+    <button onclick="setSignal('YELLOW')">Yellow</button>
+    <button onclick="setSignal('GREEN')">Green</button>
+</div>
+<div class="status" id="status"></div>
+<script>
+    function setSignal(color) {
+        document.getElementById('red').classList.remove('active');
+        document.getElementById('yellow').classList.remove('active');
+        document.getElementById('green').classList.remove('active');
+        let status = '';
+        switch(color) {
+            case 'RED':
+                document.getElementById('red').classList.add('active');
+                status = 'Stop for 60 seconds';
+                break;
+            case 'YELLOW':
+                document.getElementById('yellow').classList.add('active');
+                status = 'Ready';
+                break;
+            case 'GREEN':
+                document.getElementById('green').classList.add('active');
+                status = 'Go';
+                break;
+            default:
+                status = 'Invalid Option';
+        }
+        document.getElementById('status').textContent = status;
+    }
+    // Set initial state
+    setSignal('RED');
+</script>
+</body>
+</html>
